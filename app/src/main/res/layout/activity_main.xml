@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity">
+
+        <TextView
+            android:id="@+id/pessoaltext"
+            android:layout_width="75dp"
+            android:layout_height="38dp"
+            android:layout_marginTop="112dp"
+            android:layout_marginEnd="273dp"
+            android:lines="100"
+            android:text="Pessoal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/radioGroup"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints" />
+
+        <EditText
+            android:id="@+id/nome"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="16dp"
+            android:hint="Nome"
+            android:inputType="textPersonName"
+            app:layout_constraintBottom_toTopOf="@+id/celular"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints" />
+
+        <EditText
+            android:id="@+id/celular"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="56dp"
+            android:layout_marginEnd="16dp"
+            android:hint="Celular"
+            android:inputType="phone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints" />
+
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="47dp"
+            android:layout_height="122dp"
+            android:layout_marginStart="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/trabalho"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/celular"
+            app:layout_constraintVertical_bias="0.0"
+            tools:ignore="MissingConstraints">
+
+            <RadioButton
+                android:id="@+id/btnPessoal"
+                android:layout_width="30dp"
+                android:layout_height="44dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginBottom="19dp"
+                android:onClick="onRadioButtonClicked"
+                app:layout_constraintEnd_toStartOf="@+id/pessoaltext"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/celular"
+                app:layout_constraintVertical_bias="0.142"
+                tools:ignore="MissingConstraints"></RadioButton>
+
+            <RadioButton
+                android:id="@+id/btnTrabalho"
+                android:layout_width="30dp"
+                android:layout_height="44dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="7dp"
+                android:layout_marginBottom="43dp"
+                android:onClick="onRadioButtonClicked"
+                app:layout_constraintBottom_toTopOf="@+id/referencia"
+                app:layout_constraintEnd_toStartOf="@+id/trabalho"
+                app:layout_constraintHorizontal_bias="0.666"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/pessoaltext"
+                app:layout_constraintVertical_bias="0.0"
+                tools:ignore="MissingConstraints"></RadioButton>
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/resultado"
+            android:layout_width="353dp"
+            android:layout_height="221dp"
+            android:layout_marginStart="33dp"
+            android:layout_marginTop="416dp"
+            android:layout_marginEnd="33dp"
+            android:text="Resultado"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </TextView>
+
+        <EditText
+            android:id="@+id/referencia"
+            android:layout_width="0dp"
+            android:layout_height="42dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="224dp"
+            android:layout_marginEnd="16dp"
+            android:hint="Referencia"
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints" />
+
+        <EditText
+            android:id="@+id/email"
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            android:layout_marginStart="36dp"
+            android:layout_marginTop="220dp"
+            android:layout_marginEnd="36dp"
+            android:hint="E-mail"
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/nome"
+            tools:ignore="MissingConstraints" />
+
+        <Button
+            android:id="@+id/salvar"
+            android:layout_width="108dp"
+            android:layout_height="41dp"
+            android:layout_marginStart="156dp"
+            android:layout_marginTop="276dp"
+            android:layout_marginEnd="147dp"
+            android:text="Salvar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/nome"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/trabalho"
+            android:layout_width="0dp"
+            android:layout_height="34dp"
+            android:layout_marginTop="176dp"
+            android:layout_marginEnd="292dp"
+            android:text="Trabalho"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/radioGroup"
+            app:layout_constraintTop_toTopOf="@+id/nome"
+            tools:ignore="MissingConstraints" />
+
+        <RadioGroup
+            android:id="@+id/radioGroup2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints">
+
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/btnPesquisar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="23dp"
+            android:layout_marginTop="340dp"
+            android:layout_marginEnd="52dp"
+            android:text="Pesquisar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/edtPesquisar"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:hint="Nome"
+            android:id="@+id/edtPesquisar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="35dp"
+            android:layout_marginTop="340dp"
+            android:layout_marginEnd="18dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toStartOf="@+id/btnPesquisar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
