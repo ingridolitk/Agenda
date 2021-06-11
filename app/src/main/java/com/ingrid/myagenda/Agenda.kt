@@ -1,15 +1,13 @@
 package com.ingrid.myagenda
 
-class Agenda() {
-     var lista:MutableList<Pessoa> = mutableListOf<Pessoa>()
+class Agenda {
+    var lista: MutableList<Pessoa> = mutableListOf()
 
-    fun cadastrarContato(pessoa2: Pessoa){
-        this.lista.add(pessoa2)
+    fun cadastrarContato(pessoa: Pessoa) {
+        this.lista.add(pessoa)
     }
-    fun retornaContatos(): MutableList<Pessoa> {
-        return this.lista
-    }
-    fun retonarLista(): MutableList<Pessoa>  {
+
+    fun retonarLista(): MutableList<Pessoa> {
         return this.lista
     }
 }

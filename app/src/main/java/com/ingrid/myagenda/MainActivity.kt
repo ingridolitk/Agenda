@@ -1,92 +1,125 @@
 package com.ingrid.myagenda
 
 import android.os.Bundle
-import android.view.KeyEvent
 import android.view.View
-import android.widget.*
+import android.widget.Button
+import android.widget.EditText
+import android.widget.RadioButton
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.ingrid.myagenda.R.id
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var nome:EditText
-    private lateinit var cel:EditText
-    private lateinit var ref :EditText
-    private lateinit var email:EditText
-    private lateinit var salvar:Button
-    private lateinit var resultado :TextView
+    private lateinit var nome: EditText
+    private lateinit var cel: EditText
+    private lateinit var ref: EditText
+    private lateinit var email: EditText
+    private lateinit var salvar: Button
+    private lateinit var resultado: TextView
     private lateinit var edtPesquisar: EditText
+    private lateinit var btnPesquisar: Button
 
-    var selecionar: enumLista = enumLista.Pessoal
+    private lateinit var novaAgenda: Agenda
+
+    private var selecionar: TipoContato = TipoContato.Pessoal
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setTitle("Minha Agenda")
-         nome = findViewById<EditText>(R.id.nome)
-         cel = findViewById<EditText>(R.id.celular)
-         ref = findViewById<EditText>(R.id.referencia)
-         email = findViewById<EditText>(R.id.email)
-         salvar = findViewById<Button>(R.id.salvar)
-         resultado = findViewById<TextView>(R.id.resultado)
-         edtPesquisar = findViewById<EditText>(R.id.edtPesquisar)
-        val novaAgenda = Agenda()
-        val btnPesquisar = findViewById<Button>(R.id.btnPesquisar)
-        var lista: enumLista? = null
 
-        email.visibility = View.GONE
-        ref.visibility = View.GONE
+        configuraView()
 
-        btnPesquisar.setOnClickListener {
-            val pesquisa = edtPesquisar.text.toString()
-            var listPessoas = novaAgenda.retonarLista()
-            val resultado2 = listPessoas.find { pessoa ->
-                pessoa.nome == pesquisa
-            }
-            if (resultado != null) {
-                resultado.text = resultado2!!.exibirRegistro()
-            } else {
-                Toast.makeText(
-                    this,
-                    "Não foi possível encontrar um funcionário",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-        }
+        novaAgenda = Agenda()
 
+        listenerPesquisa()
+        botaoSalvar()
+    }
+
+    private fun botaoSalvar() {
         salvar.setOnClickListener() {
-            nome = findViewById<EditText>(R.id.nome)
-
             if (nome.text.toString().isEmpty())
-                Toast.makeText(this, "O nome do usuário não foi inserido", Toast.LENGTH_SHORT)
-                    .show()
-                    .toString()
+                mostraMensagem("O nome do usuário não foi inserido")
+
             if (cel.text.toString().isEmpty()) {
-                Toast.makeText(this, "Informe o número de contato", Toast.LENGTH_SHORT).show()
-                    .toString()
+                mostraMensagem("Informe o número de contato")
+
             } else {
-                var pessoa = Pessoa(nome.text.toString(), cel.text.toString().toInt(), email.text.toString(), ref.text.toString(), selecionar)
-                var contatos = novaAgenda.cadastrarContato(pessoa)
-                var retList = novaAgenda.retonarLista()
-                var txt = retornarLista(retList)
-                resultado.text = txt
+                val pessoa = Pessoa(
+                    nome.text.toString(),
+                    cel.text.toString().toInt(),
+                    email.text.toString(),
+                    ref.text.toString(),
+                    selecionar
+                )
+                novaAgenda.cadastrarContato(pessoa)
+                resultado.text = retornarListaEmString(novaAgenda.retonarLista())
 
             }
         }
     }
+
+    private fun mostraMensagem(mensagem: String) {
+        Toast.makeText(this, mensagem, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun listenerPesquisa() {
+        btnPesquisar.setOnClickListener {
+            val pesquisa = edtPesquisar.text.toString()
+            val listaResultados = mutableListOf<Pessoa>()
+
+            checaItemsAgenda(pesquisa, listaResultados)
+
+            checaResultado(listaResultados)
+        }
+    }
+
+    private fun checaResultado(listaResultados: MutableList<Pessoa>) {
+        if (listaResultados.isNotEmpty()) {
+            resultado.text = retornarListaEmString(listaResultados)
+        } else {
+            mostraMensagem("Não foi possível encontrar um contato")
+            resultado.text = retornarListaEmString(novaAgenda.retonarLista())
+        }
+    }
+
+    private fun checaItemsAgenda(
+        pesquisa: String,
+        listaResultados: MutableList<Pessoa>
+    ) {
+        novaAgenda.retonarLista().forEach { pessoa ->
+            if (pessoa.nome.contains(pesquisa)) {
+                listaResultados.add(pessoa)
+            }
+        }
+    }
+
+    private fun configuraView() {
+        nome = findViewById(id.nome)
+        cel = findViewById(id.celular)
+        ref = findViewById(id.referencia)
+        email = findViewById(id.email)
+        salvar = findViewById(id.salvar)
+        resultado = findViewById(id.resultado)
+        edtPesquisar = findViewById(id.edtPesquisar)
+        btnPesquisar = findViewById(id.btnPesquisar)
+    }
+
     fun onRadioButtonClicked(view: View) {
         if (view is RadioButton) {
 
             val foiChecado = view.isChecked
             when (view.id) {
-                R.id.btnPessoal ->
+                id.btnPessoal ->
                     if (foiChecado) {
-                        selecionar = enumLista.Pessoal
+                        selecionar = TipoContato.Pessoal
                         email.visibility = View.GONE
                         ref.visibility = View.VISIBLE
-
-
                     }
-                R.id.btnTrabalho -> {
+                id.btnTrabalho -> {
                     if (foiChecado) {
-                        selecionar = enumLista.Trabalho
+                        selecionar = TipoContato.Trabalho
                         email.visibility = View.VISIBLE
                         ref.visibility = View.GONE
                     }
@@ -95,16 +128,17 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun retornarLista(mutableList: MutableList<Pessoa>): String {
-        var texto: String = ""
+    fun retornarListaEmString(mutableList: MutableList<Pessoa>): String {
+        var texto = ""
         mutableList.sortBy { it.nome }
         for (pessoa in mutableList) {
-            if (selecionar == enumLista.Pessoal) {
-                texto += "Nome: " + pessoa.nome + "Celular: " + pessoa.celular + " Referência " + pessoa.referencia  + "\n"
-
-            }
-            if (selecionar == enumLista.Trabalho) {
-                texto += "Nome: " + pessoa.nome + "Celular: " + pessoa.celular + " E-mail " + pessoa.email +  "\n"
+            when (pessoa.tipo) {
+                TipoContato.Trabalho -> {
+                    texto += "Nome: " + pessoa.nome + " Celular: " + pessoa.celular + " Email " + pessoa.email + "\n"
+                }
+                TipoContato.Pessoal -> {
+                    texto += "Nome: " + pessoa.nome + " Celular: " + pessoa.celular + " Referência " + pessoa.referencia + "\n"
+                }
             }
         }
         return texto
