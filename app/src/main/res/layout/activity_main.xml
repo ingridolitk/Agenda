@@ -12,157 +12,19 @@
         tools:context=".MainActivity">
 
         <TextView
-            android:id="@+id/pessoaltext"
-            android:layout_width="64dp"
-            android:layout_height="27dp"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="16dp"
-            android:text="Pessoal"
-            app:layout_constraintStart_toEndOf="@+id/radioGroup"
-            app:layout_constraintTop_toBottomOf="@+id/celular" />
-
-        <EditText
-            android:id="@+id/nome"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="16dp"
-            android:hint="Nome"
-            android:inputType="textPersonName"
-            app:layout_constraintBottom_toTopOf="@+id/celular"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <EditText
-            android:id="@+id/celular"
-            android:layout_width="0dp"
-            android:layout_height="48dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="56dp"
-            android:layout_marginEnd="16dp"
-            android:hint="Celular"
-            android:inputType="phone"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <RadioGroup
-            android:id="@+id/radioGroup"
-            android:layout_width="47dp"
-            android:layout_height="122dp"
-            android:layout_marginStart="16dp"
-            app:layout_constraintBottom_toBottomOf="@+id/trabalho"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/celular">
-
-            <RadioButton
-                android:id="@+id/btnPessoal"
-                android:layout_width="30dp"
-                android:layout_height="44dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="4dp"
-                android:layout_marginBottom="19dp"
-                android:checked="true"
-                android:onClick="onRadioButtonClicked"
-                app:layout_constraintEnd_toStartOf="@+id/pessoaltext"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/celular"></RadioButton>
-
-            <RadioButton
-                android:id="@+id/btnTrabalho"
-                android:layout_width="30dp"
-                android:layout_height="44dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="7dp"
-                android:layout_marginBottom="43dp"
-                android:onClick="onRadioButtonClicked"
-                app:layout_constraintBottom_toTopOf="@+id/referencia"
-                app:layout_constraintEnd_toStartOf="@+id/trabalho"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/pessoaltext"></RadioButton>
-        </RadioGroup>
-
-        <TextView
             android:id="@+id/resultado"
             android:layout_width="353dp"
             android:layout_height="221dp"
             android:layout_marginStart="33dp"
             android:layout_marginTop="50dp"
-            android:textSize="24sp"
             android:layout_marginEnd="33dp"
+            android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/edtPesquisar">
-
-        </TextView>
-
-        <EditText
-            android:id="@+id/referencia"
-            android:layout_width="0dp"
-            android:layout_height="42dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:visibility="gone"
-            tools:visibility="visible"
-            android:hint="Referencia"
-            android:inputType="textPersonName"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
-
-        <EditText
-            android:id="@+id/email"
-            android:layout_width="0dp"
-            android:layout_height="44dp"
-            android:layout_marginStart="36dp"
-            android:layout_marginEnd="36dp"
-            android:visibility="gone"
-            tools:visibility="visible"
-            android:hint="E-mail"
-            android:inputType="textEmailAddress"
-            app:layout_constraintBottom_toBottomOf="@+id/referencia"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
-
-        <Button
-            android:id="@+id/salvar"
-            android:layout_width="108dp"
-            android:layout_height="41dp"
-            android:layout_marginStart="64dp"
-            android:layout_marginTop="62dp"
-            android:layout_marginEnd="47dp"
-            android:text="Salvar"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/referencia"
-            />
-
-        <TextView
-            android:id="@+id/trabalho"
-            android:layout_width="72dp"
-            android:layout_height="22dp"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="36dp"
-            android:text="Trabalho"
-            app:layout_constraintStart_toEndOf="@+id/radioGroup"
-            app:layout_constraintTop_toBottomOf="@+id/pessoaltext" />
-
-        <RadioGroup
-            android:id="@+id/radioGroup2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toTopOf="parent"
-            app:layout_constraintEnd_toStartOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-        </RadioGroup>
+    </TextView>
 
         <Button
             android:id="@+id/btnPesquisar"
@@ -172,7 +34,8 @@
             android:layout_marginEnd="16dp"
             android:text="Pesquisar"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/salvar" />
+            tools:ignore="MissingConstraints">
+        </Button>
 
         <EditText
             android:id="@+id/edtPesquisar"
@@ -184,8 +47,18 @@
             android:hint="Nome"
             android:inputType="text"
             app:layout_constraintEnd_toStartOf="@+id/btnPesquisar"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/salvar" />
+            app:layout_constraintStart_toStartOf="parent" />
 
+        <TextView
+            android:id="@+id/resultado"
+            android:layout_width="353dp"
+            android:layout_height="221dp"
+            android:layout_marginStart="33dp"
+            android:layout_marginTop="50dp"
+            android:textSize="24sp"
+            android:layout_marginEnd="33dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
