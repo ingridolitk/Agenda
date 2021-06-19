@@ -13,7 +13,8 @@
         android:layout_height="27dp"
         android:layout_marginStart="4dp"
         android:layout_marginTop="16dp"
-        android:text="Pessoal" />
+        android:text="Pessoal"
+        tools:ignore="MissingConstraints" />
 
     <EditText
         android:id="@+id/nome"
@@ -129,13 +130,13 @@
         android:layout_width="108dp"
         android:layout_height="41dp"
         android:layout_marginStart="64dp"
-        android:layout_marginTop="62dp"
+        android:layout_marginTop="148dp"
         android:layout_marginEnd="47dp"
         android:text="Salvar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/referencia"
-        />
+        app:layout_constraintTop_toTopOf="@+id/referencia" />
+
     <TextView
         android:id="@+id/trabalho"
         android:layout_width="72dp"

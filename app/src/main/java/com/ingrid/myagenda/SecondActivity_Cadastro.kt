@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.RadioButton
 import android.widget.Toast
+import kotlinx.android.synthetic.main.activity_second_cadastro.*
 
 class SecondActivity_Cadastro : AppCompatActivity() {
     private lateinit var nome: EditText
@@ -19,7 +20,8 @@ class SecondActivity_Cadastro : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_second_cadastro)
-        SalveOnClick()
+        configuraView()
+        salveOnClick()
     }
     fun configuraView() {
         nome = findViewById(R.id.nome)
@@ -29,16 +31,15 @@ class SecondActivity_Cadastro : AppCompatActivity() {
         salvar = findViewById(R.id.salvar)
 
     }
-    private fun SalveOnClick() {
-        configuraView()
-        val pessoa = Pessoa(
-            nome.text.toString(),
-            cel.toString(),
-            email.text.toString(),
-            ref.text.toString(),
-            tipo =TipoContato.Pessoal)
+    private fun salveOnClick() {
 
         salvar.setOnClickListener() {
+            val pessoa = Pessoa(
+                nome.text.toString(),
+                cel.toString(),
+                email.text.toString(),
+                ref.text.toString(),
+                tipo =TipoContato.Pessoal)
             if (nome.text.toString().isEmpty()) {
                 mostraMensagem("O nome do usuário não foi inserido")
             }
@@ -47,6 +48,9 @@ class SecondActivity_Cadastro : AppCompatActivity() {
             }
             val intent = Intent(this, MainActivity::class.java)
             intent.putExtra("nome", pessoa.nome)
+            intent.putExtra("cel", pessoa.celular)
+            intent.putExtra("email", pessoa.email)
+            intent.putExtra("referencia", pessoa.referencia)
             startActivity(intent)
         }
     }
