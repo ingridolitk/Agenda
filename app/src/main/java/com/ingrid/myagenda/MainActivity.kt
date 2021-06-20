@@ -2,19 +2,20 @@ package com.ingrid.myagenda
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import android.widget.*
+import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.ingrid.myagenda.R.id
-import kotlinx.android.synthetic.main.activity_second_cadastro.*
 
 class MainActivity : AppCompatActivity() {
     private lateinit var resultado: TextView
     private lateinit var edtPesquisar: EditText
     private lateinit var btnPesquisar: Button
     private lateinit var novaAgenda: Agenda
-    private lateinit var btnAcessa: ImageButton
-    private lateinit var pessoa: Pessoa
+    private lateinit var btnAcessa: FloatingActionButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,20 +26,22 @@ class MainActivity : AppCompatActivity() {
         listenerPesquisa()
 
         val bundle = intent.extras
-        var nome: String? = bundle?.getString("nome")
-        var celular: String? = bundle?.getString("cel")
+     //   val arrayContatos = intent.extras?.get(SecondActivity_Cadastro.CONTATOS_KEY) as Pessoa
+       val intent = Intent(this, SecondActivity_Cadastro::class.java)
+
+
         btnAcessa.setOnClickListener() {
-            val intent = Intent(this, SecondActivity_Cadastro::class.java)
+        //    val intent = Intent(this, SecondActivity_Cadastro::class.java)
             startActivity(intent)
+        }
+
+//        if(!arrayContatos.toString().isNullOrEmpty())
+//            resultado.text = arrayContatos.toString()
 
         }
-        if (!nome.isNullOrEmpty() && !celular.isNullOrEmpty()) {
 
-    }
-}
-
-    private fun mostraMensagem(messagem: String) {
-        Toast.makeText(this, messagem, Toast.LENGTH_SHORT).show()
+    private fun mostraMensagem(mensagem: String) {
+        Toast.makeText(this, mensagem, Toast.LENGTH_SHORT).show()
     }
 
     private fun listenerPesquisa() {

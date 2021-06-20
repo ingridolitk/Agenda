@@ -1,15 +1,14 @@
 package com.ingrid.myagenda
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-import android.widget.EditText
 import android.content.Intent
-import android.util.Log
+import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.EditText
 import android.widget.RadioButton
-import android.widget.Toast
-import kotlinx.android.synthetic.main.activity_second_cadastro.*
+import androidx.appcompat.app.AppCompatActivity
+import kotlinx.android.synthetic.main.activity_main.*
+
 
 class SecondActivity_Cadastro : AppCompatActivity() {
     private lateinit var nome: EditText
@@ -35,35 +34,29 @@ class SecondActivity_Cadastro : AppCompatActivity() {
     private fun salveOnClick() {
 
         salvar.setOnClickListener() {
-            val pessoa = Pessoa(
+            val pessoa = arrayOf( Pessoa(
                 nome.text.toString(),
                 cel.toString(),
                 email.text.toString(),
                 ref.text.toString(),
-                tipo =TipoContato.Pessoal)
-            if (nome.text.toString().isEmpty()) {
-                mostraMensagem("O nome do usuário não foi inserido")
+                tipo =TipoContato.Pessoal))
+
+            if (nome.text.toString().isEmpty() || cel.text.toString().isEmpty()) {
+               nome.error = "Campo obrigatório"
             }
-            if (cel.text.toString().isEmpty()) {
-                mostraMensagem("Informe o número de contato")
+            else {
+                val intent = Intent(this, MainActivity::class.java)
+                intent.putExtra(CONTATOS_KEY, pessoa)
+//                intent.putExtra("nome", pessoa.nome)
+//                intent.putExtra("cel", cel)
+//                intent.putExtra("email", email)
+//                intent.putExtra("referencia", ref)
+                // startActivity(intent)
+               // agenda.cadastrarContato(pessoa)
+                finish()
             }
-            val intent = Intent(this, MainActivity::class.java)
-            val listaContatos = arrayOf(
-                Pessoa(nome="",celular = "", referencia = "", email="",tipo=TipoContato.Pessoal)
-            )
-            intent.putExtra(CONTATOS_KEY, listaContatos)
-            intent.putExtra("nome", pessoa.nome)
-            intent.putExtra("cel", pessoa.celular)
-            intent.putExtra("email", pessoa.email)
-            intent.putExtra("referencia", pessoa.referencia)
-           // startActivity(intent)
-            finish()
         }
     }
-    private fun mostraMensagem(mensagem: String) {
-        Toast.makeText(this, mensagem, Toast.LENGTH_SHORT).show()
-    }
-
     fun onRadioButtonClicked(view: View) {
         if (view is RadioButton) {
 
@@ -87,6 +80,5 @@ class SecondActivity_Cadastro : AppCompatActivity() {
     }
     companion object{
         val CONTATOS_KEY = "PESSOA"
-        val lista =  mutableListOf<String>("a", "b", "c")
     }
 }
