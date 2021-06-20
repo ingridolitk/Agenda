@@ -11,7 +11,15 @@ open class Pessoa(
     var email: String,
     var tipo: TipoContato
 ): Parcelable {
-    fun exibirNome(): String {
-        return this.nome
+    fun Pessoa2(nome:String, celular: String,referencia: String, email: String, tipo: TipoContato ){
+        this.nome=nome
+        this.celular=celular
+        this.referencia=referencia
+        this.email=email
+        this.tipo=tipo
+    }
+
+    override fun toString(): String {
+        return nome
     }
 }

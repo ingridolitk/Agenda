@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.EditText
 import android.content.Intent
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.RadioButton
@@ -47,7 +48,6 @@ class SecondActivity_Cadastro : AppCompatActivity() {
                 mostraMensagem("Informe o número de contato")
             }
             val intent = Intent(this, MainActivity::class.java)
-
             val listaContatos = arrayOf(
                 Pessoa(nome="",celular = "", referencia = "", email="",tipo=TipoContato.Pessoal)
             )
@@ -56,7 +56,8 @@ class SecondActivity_Cadastro : AppCompatActivity() {
             intent.putExtra("cel", pessoa.celular)
             intent.putExtra("email", pessoa.email)
             intent.putExtra("referencia", pessoa.referencia)
-            startActivity(intent)
+           // startActivity(intent)
+            finish()
         }
     }
     private fun mostraMensagem(mensagem: String) {

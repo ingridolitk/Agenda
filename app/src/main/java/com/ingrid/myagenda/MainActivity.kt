@@ -2,9 +2,11 @@ package com.ingrid.myagenda
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.ingrid.myagenda.R.id
+import kotlinx.android.synthetic.main.activity_second_cadastro.*
 
 class MainActivity : AppCompatActivity() {
     private lateinit var resultado: TextView
@@ -12,7 +14,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var btnPesquisar: Button
     private lateinit var novaAgenda: Agenda
     private lateinit var btnAcessa: ImageButton
-
+    private lateinit var pessoa: Pessoa
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,15 +30,12 @@ class MainActivity : AppCompatActivity() {
         btnAcessa.setOnClickListener() {
             val intent = Intent(this, SecondActivity_Cadastro::class.java)
             startActivity(intent)
+
         }
         if (!nome.isNullOrEmpty() && !celular.isNullOrEmpty()) {
-            val listaResultados: Pessoa =
-                (intent.extras?.get(SecondActivity_Cadastro.CONTATOS_KEY) as Pessoa)
 
-            mostraMensagem(resultado.toString())
-            mostraMensagem(listaResultados.toString())
-        }
     }
+}
 
     private fun mostraMensagem(messagem: String) {
         Toast.makeText(this, messagem, Toast.LENGTH_SHORT).show()
