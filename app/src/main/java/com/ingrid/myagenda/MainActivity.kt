@@ -17,9 +17,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         configuraView()
-
         novaAgenda = Agenda()
 
         listenerPesquisa()
@@ -27,14 +25,17 @@ class MainActivity : AppCompatActivity() {
         val bundle = intent.extras
         var nome: String? = bundle?.getString("nome")
         var celular: String? = bundle?.getString("cel")
-        val listaResultados = mutableListOf<Pessoa>()
-
         btnAcessa.setOnClickListener() {
             val intent = Intent(this, SecondActivity_Cadastro::class.java)
             startActivity(intent)
         }
-        if (!nome.isNullOrEmpty() && !celular.isNullOrEmpty())
-            resultado.text=nome
+        if (!nome.isNullOrEmpty() && !celular.isNullOrEmpty()) {
+            val listaResultados: Pessoa =
+                (intent.extras?.get(SecondActivity_Cadastro.CONTATOS_KEY) as Pessoa)
+
+            mostraMensagem(resultado.toString())
+            mostraMensagem(listaResultados.toString())
+        }
     }
 
     private fun mostraMensagem(messagem: String) {

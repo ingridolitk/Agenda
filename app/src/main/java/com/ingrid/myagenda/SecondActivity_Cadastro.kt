@@ -47,6 +47,11 @@ class SecondActivity_Cadastro : AppCompatActivity() {
                 mostraMensagem("Informe o número de contato")
             }
             val intent = Intent(this, MainActivity::class.java)
+
+            val listaContatos = arrayOf(
+                Pessoa(nome="",celular = "", referencia = "", email="",tipo=TipoContato.Pessoal)
+            )
+            intent.putExtra(CONTATOS_KEY, listaContatos)
             intent.putExtra("nome", pessoa.nome)
             intent.putExtra("cel", pessoa.celular)
             intent.putExtra("email", pessoa.email)
@@ -79,6 +84,8 @@ class SecondActivity_Cadastro : AppCompatActivity() {
             }
         }
     }
-
-
+    companion object{
+        val CONTATOS_KEY = "PESSOA"
+        val lista =  mutableListOf<String>("a", "b", "c")
+    }
 }
