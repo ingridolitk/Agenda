@@ -7,8 +7,6 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.RadioButton
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_main.*
-
 
 class SecondActivity_Cadastro : AppCompatActivity() {
     private lateinit var nome: EditText
@@ -39,7 +37,7 @@ class SecondActivity_Cadastro : AppCompatActivity() {
                 cel.toString(),
                 email.text.toString(),
                 ref.text.toString(),
-                tipo =TipoContato.Pessoal))
+                TipoContato.Pessoal))
 
             if (nome.text.toString().isEmpty() || cel.text.toString().isEmpty()) {
                nome.error = "Campo obrigatório"
@@ -51,9 +49,9 @@ class SecondActivity_Cadastro : AppCompatActivity() {
 //                intent.putExtra("cel", cel)
 //                intent.putExtra("email", email)
 //                intent.putExtra("referencia", ref)
-                // startActivity(intent)
+                 startActivity(intent)
                // agenda.cadastrarContato(pessoa)
-                finish()
+                //finish()
             }
         }
     }

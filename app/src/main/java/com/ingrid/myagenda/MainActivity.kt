@@ -7,6 +7,7 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.ingrid.myagenda.R.id
 
@@ -20,26 +21,29 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         configuraView()
         novaAgenda = Agenda()
 
         listenerPesquisa()
 
-        val bundle = intent.extras
-     //   val arrayContatos = intent.extras?.get(SecondActivity_Cadastro.CONTATOS_KEY) as Pessoa
        val intent = Intent(this, SecondActivity_Cadastro::class.java)
 
-
         btnAcessa.setOnClickListener() {
-        //    val intent = Intent(this, SecondActivity_Cadastro::class.java)
+            val intent = Intent(this, SecondActivity_Cadastro::class.java)
             startActivity(intent)
         }
-
+//
 //        if(!arrayContatos.toString().isNullOrEmpty())
 //            resultado.text = arrayContatos.toString()
 
         }
 
+    override fun onResume() {
+        super.onResume()
+        val bundle = intent.extras
+         //val arrayContatos = intent.extras?.get(SecondActivity_Cadastro.CONTATOS_KEY) as Array<Pessoa>?
+    }
     private fun mostraMensagem(mensagem: String) {
         Toast.makeText(this, mensagem, Toast.LENGTH_SHORT).show()
     }
@@ -81,5 +85,4 @@ class MainActivity : AppCompatActivity() {
         btnPesquisar = findViewById(id.btnPesquisar)
         btnAcessa = findViewById(id.btnAcessa)
     }
-
 }
