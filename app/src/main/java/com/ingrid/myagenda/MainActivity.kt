@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.ingrid.myagenda.R.id
+import com.ingrid.myagenda.SecondActivity_Cadastro.Companion.CONTATOS_KEY
 
 class MainActivity : AppCompatActivity() {
     private lateinit var resultado: TextView
@@ -27,7 +28,7 @@ class MainActivity : AppCompatActivity() {
 
         listenerPesquisa()
 
-       val intent = Intent(this, SecondActivity_Cadastro::class.java)
+        val intent = Intent(this, SecondActivity_Cadastro::class.java)
 
         btnAcessa.setOnClickListener() {
             val intent = Intent(this, SecondActivity_Cadastro::class.java)
@@ -37,13 +38,22 @@ class MainActivity : AppCompatActivity() {
 //        if(!arrayContatos.toString().isNullOrEmpty())
 //            resultado.text = arrayContatos.toString()
 
-        }
+    }
 
     override fun onResume() {
         super.onResume()
-        val bundle = intent.extras
-         //val arrayContatos = intent.extras?.get(SecondActivity_Cadastro.CONTATOS_KEY) as Array<Pessoa>?
+        val arrayContato = intent.getParcelableArrayExtra(CONTATOS_KEY)
+        if (arrayContato != null) {
+            //  val contato = arrayContato[it] as Pessoa
+            arrayContato.forEach {
+                val contato = arrayContato[0] as Pessoa
+                resultado.text =
+                    contato.nome + contato.celular + contato.referencia
+                Toast.makeText(this, contato.nome, Toast.LENGTH_SHORT).show()
+            }
+        }
     }
+
     private fun mostraMensagem(mensagem: String) {
         Toast.makeText(this, mensagem, Toast.LENGTH_SHORT).show()
     }
@@ -85,4 +95,8 @@ class MainActivity : AppCompatActivity() {
         btnPesquisar = findViewById(id.btnPesquisar)
         btnAcessa = findViewById(id.btnAcessa)
     }
+}
+
+private operator fun <T> Array<T>.get(it: T): T {
+    return it
 }

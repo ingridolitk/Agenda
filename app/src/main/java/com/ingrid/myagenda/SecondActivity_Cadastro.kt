@@ -34,7 +34,7 @@ class SecondActivity_Cadastro : AppCompatActivity() {
         salvar.setOnClickListener() {
             val pessoa = arrayOf( Pessoa(
                 nome.text.toString(),
-                cel.toString(),
+                cel.text.toString(),
                 email.text.toString(),
                 ref.text.toString(),
                 TipoContato.Pessoal))
