@@ -45,13 +45,7 @@ class SecondActivity_Cadastro : AppCompatActivity() {
             else {
                 val intent = Intent(this, MainActivity::class.java)
                 intent.putExtra(CONTATOS_KEY, pessoa)
-//                intent.putExtra("nome", pessoa.nome)
-//                intent.putExtra("cel", cel)
-//                intent.putExtra("email", email)
-//                intent.putExtra("referencia", ref)
-                 startActivity(intent)
-               // agenda.cadastrarContato(pessoa)
-                //finish()
+                startActivity(intent)
             }
         }
     }

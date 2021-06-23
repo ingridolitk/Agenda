@@ -7,50 +7,50 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.ingrid.myagenda.R.id
 import com.ingrid.myagenda.SecondActivity_Cadastro.Companion.CONTATOS_KEY
+
+var arrayContato:MutableList<Pessoa> = mutableListOf()
+var novaAgenda: Agenda = Agenda()
 
 class MainActivity : AppCompatActivity() {
     private lateinit var resultado: TextView
     private lateinit var edtPesquisar: EditText
     private lateinit var btnPesquisar: Button
-    private lateinit var novaAgenda: Agenda
     private lateinit var btnAcessa: FloatingActionButton
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         configuraView()
-        novaAgenda = Agenda()
-
-        listenerPesquisa()
-
-        val intent = Intent(this, SecondActivity_Cadastro::class.java)
+        //novaAgenda = Agenda()
 
         btnAcessa.setOnClickListener() {
             val intent = Intent(this, SecondActivity_Cadastro::class.java)
             startActivity(intent)
         }
-//
-//        if(!arrayContatos.toString().isNullOrEmpty())
-//            resultado.text = arrayContatos.toString()
-
     }
-
     override fun onResume() {
         super.onResume()
-        val arrayContato = intent.getParcelableArrayExtra(CONTATOS_KEY)
-        if (arrayContato != null) {
+        var texto = ""
+
+
+        if (arrayContato.size >0 || intent.getParcelableArrayExtra(CONTATOS_KEY) != null) {
+
+            novaAgenda.cadastrarContato(intent.getParcelableArrayExtra(CONTATOS_KEY)?.get(0) as Pessoa)
+
             //  val contato = arrayContato[it] as Pessoa
-            arrayContato.forEach {
-                val contato = arrayContato[0] as Pessoa
-                resultado.text =
-                    contato.nome + contato.celular + contato.referencia
+            listenerPesquisa()
+            novaAgenda.retonarLista().forEach {
+                val contato = it
+                texto += it.nome.toString() + " "
+                    //contato.nome + contato.celular + contato.referencia
                 Toast.makeText(this, contato.nome, Toast.LENGTH_SHORT).show()
             }
+            resultado.text  = texto
         }
     }
 
@@ -62,6 +62,8 @@ class MainActivity : AppCompatActivity() {
         btnPesquisar.setOnClickListener {
             val pesquisa = edtPesquisar.text.toString()
             val listaResultados = mutableListOf<Pessoa>()
+
+
 
             checaItensAgenda(pesquisa, listaResultados)
 
